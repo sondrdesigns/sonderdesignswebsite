@@ -54,7 +54,9 @@
       target: 'esnext',
       outDir: 'dist',
       chunkSizeWarningLimit: 1000,
+      assetsInlineLimit: 0,
     },
+    assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.svg'],
     server: {
       port: 3000,
       open: true,

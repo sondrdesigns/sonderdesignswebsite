@@ -5,8 +5,8 @@ import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { motion } from 'motion/react';
-import liquidMetalImage from '../assets/48e9a45ec1626552d25413ca5f09009387cfd733.png?url';
-import blendCafeImage from '../assets/a5aba046f347df51b3a9508fa3129c084c4f057b.png?url';
+import liquidMetalImage from '../assets/48e9a45ec1626552d25413ca5f09009387cfd733.png';
+import blendCafeImage from '../assets/a5aba046f347df51b3a9508fa3129c084c4f057b.png';
 
 const featuredProjects = [
   {
