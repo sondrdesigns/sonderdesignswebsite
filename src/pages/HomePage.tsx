@@ -5,9 +5,8 @@ import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { motion } from 'motion/react';
-// Use images from public folder with absolute paths
-const liquidMetalImage = '/images/48e9a45ec1626552d25413ca5f09009387cfd733.png';
-const blendCafeImage = '/images/a5aba046f347df51b3a9508fa3129c084c4f057b.png';
+import liquidMetalImage from '../assets/48e9a45ec1626552d25413ca5f09009387cfd733.png';
+import blendCafeImage from '../assets/a5aba046f347df51b3a9508fa3129c084c4f057b.png';
 
 const featuredProjects = [
   {
