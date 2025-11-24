@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { motion } from 'motion/react';
-const blendCafeImage = '/images/a5aba046f347df51b3a9508fa3129c084c4f057b.png';
+import blendCafeImage from '../assets/a5aba046f347df51b3a9508fa3129c084c4f057b.png';
 
 const projects = [
   {

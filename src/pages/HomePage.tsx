@@ -6,9 +6,9 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { motion } from 'motion/react';
 // Firebase will be loaded dynamically when form is submitted
-// Images from public folder - paths should work as-is
-const liquidMetalImage = '/images/48e9a45ec1626552d25413ca5f09009387cfd733.png';
-const blendCafeImage = '/images/a5aba046f347df51b3a9508fa3129c084c4f057b.png';
+// Import images so Vite processes them correctly
+import liquidMetalImage from '../assets/48e9a45ec1626552d25413ca5f09009387cfd733.png';
+import blendCafeImage from '../assets/a5aba046f347df51b3a9508fa3129c084c4f057b.png';
 
 const featuredProjects = [
   {
