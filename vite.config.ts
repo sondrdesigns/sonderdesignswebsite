@@ -54,7 +54,31 @@
       target: 'esnext',
       outDir: 'dist',
       chunkSizeWarningLimit: 1000,
-      assetsInlineLimit: 0,
+      assetsInlineLimit: 4096, // Inline small assets (< 4kb) to reduce HTTP requests
+      cssCodeSplit: true,
+      sourcemap: false, // Disable sourcemaps in production for smaller bundles
+      minify: 'esbuild', // Use esbuild for faster minification
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // Separate vendor chunks for better caching
+            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+            'motion-vendor': ['motion/react'],
+            'ui-vendor': [
+              '@radix-ui/react-accordion',
+              '@radix-ui/react-dialog',
+              '@radix-ui/react-dropdown-menu',
+              '@radix-ui/react-select',
+            ],
+          },
+          // Optimize chunk file names
+          chunkFileNames: 'assets/js/[name]-[hash].js',
+          entryFileNames: 'assets/js/[name]-[hash].js',
+          assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
+        },
+      },
+      // Enable compression
+      reportCompressedSize: true,
     },
     assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.svg'],
     server: {

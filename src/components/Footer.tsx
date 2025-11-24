@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Linkedin, Twitter, Instagram, Github } from 'lucide-react';
 import { motion } from 'motion/react';
 
-export function Footer() {
+export const Footer = memo(function Footer() {
   return (
     <footer className="bg-black text-white px-8 py-16">
       <div className="max-w-7xl mx-auto">
@@ -108,4 +109,4 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+});

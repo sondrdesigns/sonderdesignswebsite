@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 
-export function Navigation() {
+export const Navigation = memo(function Navigation() {
   const location = useLocation();
   
   const navItems = [
@@ -49,4 +50,4 @@ export function Navigation() {
       </div>
     </motion.nav>
   );
-}
+});

@@ -1,11 +1,12 @@
-import { useState, type FormEvent } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Zap, Code2 } from 'lucide-react';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { motion } from 'motion/react';
-const liquidMetalImage = '/assets/liquid-metal.png';
-const blendCafeImage = '/assets/blend-cafe.png';
+const liquidMetalImage = '/images/48e9a45ec1626552d25413ca5f09009387cfd733.png';
+const blendCafeImage = '/images/a5aba046f347df51b3a9508fa3129c084c4f057b.png';
 
 const featuredProjects = [
   {
@@ -22,7 +23,7 @@ export function HomePage() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     console.log('Email submitted:', email);
     setSubmitted(true);
@@ -30,7 +31,7 @@ export function HomePage() {
       setEmail('');
       setSubmitted(false);
     }, 3000);
-  };
+  }, [email]);
 
   return (
     <div className="pt-20">
@@ -55,6 +56,9 @@ export function HomePage() {
                 src={liquidMetalImage}
                 alt="Liquid metal design"
                 className="w-full h-auto max-w-2xl object-contain drop-shadow-2xl"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 animate={{ 
                   y: [0, -15, 0],
                   rotate: [0, 1, 0, -1, 0]
@@ -230,11 +234,12 @@ export function HomePage() {
                     transition={{ duration: 0.6, ease: "easeOut" }}
                     className="w-full h-full"
                   >
-                    <img
+                    <ImageWithFallback
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover"
-                      style={{ transform: 'scale(1.05)', objectPosition: 'center' }}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </motion.div>
                 </div>

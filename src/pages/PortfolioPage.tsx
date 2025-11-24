@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { motion } from 'motion/react';
-const blendCafeImage = '/assets/blend-cafe.png';
+const blendCafeImage = '/images/a5aba046f347df51b3a9508fa3129c084c4f057b.png';
 
 const projects = [
   {
@@ -100,11 +101,10 @@ export function PortfolioPage() {
                   transition={{ duration: 0.6 }}
                   className="w-full h-full"
                 >
-                  <img
+                  <ImageWithFallback
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover"
-                    style={{ transform: 'scale(1.05)', objectPosition: 'center' }}
                   />
                 </motion.div>
               </motion.div>

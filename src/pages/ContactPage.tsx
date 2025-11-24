@@ -1,10 +1,10 @@
-import React, { useState, type FormEvent } from 'react';
+import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Instagram, Linkedin } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { motion } from 'motion/react';
-const contactImage = '/assets/contact.png';
+const contactImage = '/images/b05e348ce9ae7644e189446bd7fb20fd0c7f66ed.png';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 
@@ -18,7 +18,7 @@ export function ContactPage() {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setIsSubmitting(true);
@@ -64,7 +64,6 @@ export function ContactPage() {
               src={contactImage} 
               alt="Vintage communication device" 
               className="w-full h-full object-cover"
-              style={{ transform: 'scale(1.05)', objectPosition: 'center' }}
             />
           </motion.div>
 
