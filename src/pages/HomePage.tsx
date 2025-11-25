@@ -7,8 +7,8 @@ import { Input } from '../components/ui/input';
 import { motion } from 'motion/react';
 // Firebase will be loaded dynamically when form is submitted
 // Import images as modules for proper Vite processing
-import liquidMetalImage from '../assets/48e9a45ec1626552d25413ca5f09009387cfd733.png';
-import blendCafeImage from '../assets/a5aba046f347df51b3a9508fa3129c084c4f057b.png';
+import liquidMetalImage from '../assets/48e9a45ec1626552d25413ca5f09009387cfd733.jpg';
+import blendCafeImage from '../assets/a5aba046f347df51b3a9508fa3129c084c4f057b.jpg';
 
 const featuredProjects = [
   {
