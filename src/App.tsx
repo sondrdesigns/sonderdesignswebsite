@@ -1,7 +1,5 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 
@@ -17,6 +15,48 @@ const PageLoader = () => (
     <div className="animate-pulse text-foreground/40">Loading...</div>
   </div>
 );
+
+// Component to load analytics after page is interactive
+function DeferredAnalytics() {
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    // Wait for page to be interactive before loading analytics
+    const loadAnalytics = () => {
+      if (document.readyState === 'complete') {
+        // Use requestIdleCallback if available, else setTimeout
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(() => setShouldLoad(true), { timeout: 2000 });
+        } else {
+          setTimeout(() => setShouldLoad(true), 2000);
+        }
+      } else {
+        window.addEventListener('load', () => {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => setShouldLoad(true), { timeout: 2000 });
+          } else {
+            setTimeout(() => setShouldLoad(true), 2000);
+          }
+        });
+      }
+    };
+
+    loadAnalytics();
+  }, []);
+
+  if (!shouldLoad) return null;
+
+  // Dynamically import analytics components
+  const Analytics = lazy(() => import('@vercel/analytics/react').then(m => ({ default: m.Analytics })));
+  const SpeedInsights = lazy(() => import('@vercel/speed-insights/react').then(m => ({ default: m.SpeedInsights })));
+
+  return (
+    <Suspense fallback={null}>
+      <Analytics />
+      <SpeedInsights />
+    </Suspense>
+  );
+}
 
 export default function App() {
   return (
@@ -34,8 +74,7 @@ export default function App() {
         </Suspense>
         <Footer />
       </div>
-      <Analytics />
-      <SpeedInsights />
+      <DeferredAnalytics />
     </Router>
   );
 }

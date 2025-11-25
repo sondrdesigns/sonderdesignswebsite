@@ -2446,10 +2446,17 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Optimize animations and transforms */
+/* Optimize animations and transforms with GPU acceleration */
 img, picture, video {
   content-visibility: auto;
   contain-intrinsic-size: auto 500px;
+}
+
+/* Optimize for performance - use transform and opacity for animations */
+@supports (will-change: transform) {
+  [class*="motion-"], [class*="animate-"] {
+    will-change: transform, opacity;
+  }
 }
 
 /* Respect user's motion preferences */
@@ -2471,6 +2478,13 @@ img, picture, video {
     height: auto;
   }
 }
+
+/* Reduce repaints and reflows */
+.contain-layout {
+  contain: layout style paint;
+}
+
+/* Font loading is handled in index.html with font-display: swap */
 
 /* Performance optimizations for mobile and reduced motion */
 @media (prefers-reduced-motion: reduce) {

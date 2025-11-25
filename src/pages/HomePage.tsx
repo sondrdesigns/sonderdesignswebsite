@@ -88,7 +88,7 @@ export function HomePage() {
                 height="600"
                 style={{ 
                   aspectRatio: '4/3',
-                  willChange: 'transform'
+                  contentVisibility: 'auto'
                 }}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
                 animate={{ 
@@ -98,7 +98,8 @@ export function HomePage() {
                 transition={{ 
                   duration: 8, 
                   repeat: Infinity, 
-                  ease: "easeInOut"
+                  ease: "easeInOut",
+                  type: "tween" // Better performance than default
                 }}
               />
             </motion.div>

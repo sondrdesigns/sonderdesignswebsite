@@ -89,17 +89,17 @@ export function PortfolioPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.08, ease: "easeOut" }}
               layout
-              whileHover={{ y: -10 }}
+              whileHover={{ y: -8 }}
             >
               <motion.div 
                 className="aspect-[4/3] overflow-hidden bg-black mb-6"
                 whileHover={{ boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}
               >
                 <motion.div
-                  whileHover={{ scale: 1.1, rotate: 1 }}
-                  transition={{ duration: 0.6 }}
+                  whileHover={{ scale: 1.05, rotate: 0.5 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                   className="w-full h-full"
                 >
                   <ImageWithFallback
