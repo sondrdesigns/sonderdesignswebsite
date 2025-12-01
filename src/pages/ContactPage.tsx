@@ -5,6 +5,7 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { motion } from 'motion/react';
 import contactImage from '../assets/b05e348ce9ae7644e189446bd7fb20fd0c7f66ed.png';
+import { emailjs, emailjsConfig } from '../lib/emailjs';
 
 export function ContactPage() {
   const [formData, setFormData] = useState({
@@ -21,53 +22,31 @@ export function ContactPage() {
     setError(null);
     setIsSubmitting(true);
 
-    // Create a timeout to prevent infinite loading
-    const timeoutId = setTimeout(() => {
-      setIsSubmitting(false);
-      setError('Request timed out. Please try again.');
-    }, 10000); // 10 second timeout
-
     try {
-      const { put } = await import('@vercel/blob');
-      
-      // Create unique filename with timestamp and sanitized name
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const nameSanitized = formData.name.replace(/[^a-zA-Z0-9]/g, '-').substring(0, 50);
-      const filename = `contacts/${timestamp}-${nameSanitized}.json`;
-      
-      // Prepare form data as JSON
-      const submissionData = {
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
-        timestamp: new Date().toISOString(),
-      };
-      
-      // Save contact form submission to Vercel Blob
-      await put(filename, JSON.stringify(submissionData, null, 2), {
-        access: 'public',
-        contentType: 'application/json',
-      });
+      // Send email using EmailJS
+      await emailjs.send(
+        emailjsConfig.serviceId,
+        emailjsConfig.templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: 'Sondr Studios',
+        },
+        emailjsConfig.publicKey
+      );
 
-      // Clear timeout on success
-      clearTimeout(timeoutId);
-
-      // Show success immediately
       setSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
-      setIsSubmitting(false); // Clear loading state immediately
       
-      // Reset success message after 5 seconds
       setTimeout(() => {
         setSubmitted(false);
-      }, 5000);
+      }, 3000);
     } catch (err) {
-      // Clear timeout on error
-      clearTimeout(timeoutId);
-      
-      console.error('Error saving contact:', err);
-      setIsSubmitting(false); // Always clear loading state on error
+      console.error('Error sending email:', err);
       setError('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -207,11 +186,6 @@ export function ContactPage() {
                     />
                   </div>
 
-                  {submitted && (
-                    <div className="text-green-700 text-sm bg-green-50 p-4 rounded-lg border border-green-200">
-                      ✓ Message sent successfully! We'll get back to you soon.
-                    </div>
-                  )}
                   {error && (
                     <div className="text-red-600 text-sm bg-red-50 p-3 rounded border border-red-200">
                       {error}

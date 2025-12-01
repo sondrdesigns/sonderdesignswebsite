@@ -5,6 +5,7 @@ import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { motion } from 'motion/react';
+import { emailjs, emailjsConfig } from '../lib/emailjs';
 // Import images as modules for proper Vite processing
 import liquidMetalImage from '../assets/48e9a45ec1626552d25413ca5f09009387cfd733.png';
 import blendCafeImage from '../assets/a5aba046f347df51b3a9508fa3129c084c4f057b.png';
@@ -31,52 +32,29 @@ export function HomePage() {
     setError(null);
     setIsSubmitting(true);
 
-    // Create a timeout to prevent infinite loading
-    const timeoutId = setTimeout(() => {
-      setIsSubmitting(false);
-      setError('Request timed out. Please try again.');
-    }, 10000); // 10 second timeout
-
     try {
-      const { put } = await import('@vercel/blob');
-      
-      // Create unique filename with timestamp and sanitized email
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const emailSanitized = email.replace(/[^a-zA-Z0-9]/g, '-');
-      const filename = `newsletter/${timestamp}-${emailSanitized}.json`;
-      
-      // Prepare form data as JSON
-      const formData = {
-        email: email,
-        timestamp: new Date().toISOString(),
-        source: 'homepage',
-      };
-      
-      // Save newsletter subscription to Vercel Blob
-      await put(filename, JSON.stringify(formData, null, 2), {
-        access: 'public',
-        contentType: 'application/json',
-      });
+      // Send newsletter subscription email using EmailJS
+      await emailjs.send(
+        emailjsConfig.serviceId,
+        emailjsConfig.newsletterTemplateId,
+        {
+          email: email,
+          source: 'homepage',
+          subscription_date: new Date().toISOString(),
+        },
+        emailjsConfig.publicKey
+      );
 
-      // Clear timeout on success
-      clearTimeout(timeoutId);
-
-      // Show success immediately
       setSubmitted(true);
       setEmail('');
-      setIsSubmitting(false); // Clear loading state immediately
-      
-      // Reset success message after 5 seconds
       setTimeout(() => {
         setSubmitted(false);
-      }, 5000);
+      }, 3000);
     } catch (err) {
-      // Clear timeout on error
-      clearTimeout(timeoutId);
-      
-      console.error('Error saving newsletter subscription:', err);
-      setIsSubmitting(false); // Always clear loading state on error
+      console.error('Error sending newsletter subscription:', err);
       setError('Failed to subscribe. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   }, [email]);
 
@@ -427,15 +405,6 @@ export function HomePage() {
               {isSubmitting ? 'Subscribing...' : submitted ? 'Subscribed ✓' : 'Subscribe'}
             </Button>
           </motion.form>
-          {submitted && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-green-700 text-sm bg-green-50 p-4 rounded-lg border border-green-200 max-w-xl mx-auto mt-4 text-center"
-            >
-              ✓ Successfully subscribed! Thank you for joining our newsletter.
-            </motion.div>
-          )}
           {error && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
