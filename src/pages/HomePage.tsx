@@ -72,7 +72,7 @@ export function HomePage() {
             >
               <motion.img
                 src={liquidMetalImage}
-                alt="Sondr Designs - Web Design Agency Honolulu Hawaii"
+                alt="Liquid metal design"
                 className="w-full h-auto max-w-2xl object-contain drop-shadow-2xl"
                 loading="eager"
                 fetchPriority="high"
@@ -115,8 +115,8 @@ export function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                <span className="block">Sondr Designs:</span>
-                <span className="block text-foreground/70">Web Design That Performs</span>
+                <span className="block">Web-Design that</span>
+                <span className="block text-foreground/70">performs</span>
               </motion.h1>
               
               <motion.p 
@@ -125,7 +125,8 @@ export function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
               >
-                Sondr Designs is a premier web design agency in Honolulu, Hawaii. We craft elevated digital experiences where simplicity meets chaos, strategy meets execution, and vision becomes reality. Our web design and SEO services help businesses grow online.
+                We craft elevated digital experiences where simplicity meets chaos, 
+                strategy meets execution, and vision becomes reality.
               </motion.p>
               
               <motion.div 
@@ -169,10 +170,10 @@ export function HomePage() {
             viewport={{ once: true }}
           >
             <h2 className="text-5xl md:text-6xl lg:text-7xl mb-6 tracking-tight">
-              Web Design & SEO Services by Sondr Designs
+              What we deliver
             </h2>
             <p className="text-xl text-foreground/50 max-w-2xl">
-              Sondr Designs delivers strategic web design, SEO, and digital marketing services that drive measurable results for businesses in Honolulu, Hawaii, and beyond.
+              Strategic design and development services that drive results
             </p>
           </motion.div>
           
@@ -180,18 +181,18 @@ export function HomePage() {
             {[
               { 
                 icon: Sparkles, 
-                title: 'Web Design & Brand Design', 
-                desc: 'Sondr Designs creates strategic visual identity systems and custom web design that capture your essence and resonate with your audience. Our web design agency specializes in creating beautiful, functional websites.' 
+                title: 'Brand Design', 
+                desc: 'Strategic visual identity systems that capture your essence and resonate with your audience' 
               },
               { 
                 icon: Code2, 
-                title: 'Web Development & SEO', 
-                desc: 'High-performance websites and applications built with cutting-edge technology, optimized for search engines. Sondr Designs combines web development with SEO best practices for maximum visibility.' 
+                title: 'Web Development', 
+                desc: 'High-performance websites and applications built with cutting-edge technology and best practices' 
               },
               { 
                 icon: Zap, 
-                title: 'Digital Marketing & SEO', 
-                desc: 'Data-driven SEO and digital marketing campaigns that amplify your reach and drive engagement. Sondr Designs helps your business rank higher in search results and connect with your target audience.' 
+                title: 'Digital Strategy', 
+                desc: 'Data-driven campaigns and user experiences that amplify your reach and drive engagement' 
               }
             ].map((service, index) => (
               <motion.div
@@ -261,7 +262,7 @@ export function HomePage() {
                   >
                     <ImageWithFallback
                       src={project.image}
-                      alt={`${project.title} - Web Design Project by Sondr Designs`}
+                      alt={project.title}
                       className="w-full h-full object-cover"
                       loading="lazy"
                       decoding="async"
@@ -387,31 +388,6 @@ export function HomePage() {
             </Link>
           </motion.div>
         </div>
-      </section>
-
-      {/* SEO Content Section - Hidden but crawlable */}
-      <section className="sr-only" aria-label="SEO Content">
-        <h2>Sondr Designs - Leading Web Design Agency in Honolulu, Hawaii</h2>
-        <p>
-          Sondr Designs is a premier web design agency based in Honolulu, Hawaii, specializing in web design, SEO services, and digital marketing. 
-          As a trusted web design agency, we help businesses create high-performance websites that drive results. Our team of expert web designers 
-          and SEO specialists work together to deliver comprehensive web design and SEO solutions.
-        </p>
-        <p>
-          When you search for "Sondr Designs" or "web design agency Honolulu," you'll find our team ready to help. We offer professional web design 
-          services, SEO optimization, and digital marketing strategies tailored to your business needs. Contact Sondr Designs today to learn how our 
-          web design and SEO services can transform your online presence.
-        </p>
-        <h3>Why Choose Sondr Designs for Web Design and SEO?</h3>
-        <p>
-          Sondr Designs combines expert web design with proven SEO strategies to help your business succeed online. Our web design agency understands 
-          that great web design must work hand-in-hand with SEO to achieve maximum results. Whether you need a new website, SEO optimization, or 
-          comprehensive digital marketing services, Sondr Designs delivers.
-        </p>
-        <p>
-          Located in Honolulu, Hawaii, Sondr Designs serves clients nationwide. Our web design and SEO services are designed to help businesses of all 
-          sizes improve their online visibility and drive more traffic. Trust Sondr Designs for all your web design and SEO needs.
-        </p>
       </section>
     </main>
   );
