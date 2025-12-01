@@ -15,12 +15,6 @@ Add these environment variables in your Vercel project settings:
 3. **VITE_EMAILJS_TEMPLATE_ID**
    - Value: `template_pvgfdu6`
 
-### Optional Variable:
-
-4. **VITE_EMAILJS_NEWSLETTER_TEMPLATE_ID** (Optional)
-   - Value: `template_pvgfdu6` (or a different template ID if you have a separate newsletter template)
-   - If not set, it will use `VITE_EMAILJS_TEMPLATE_ID` for both contact and newsletter forms
-
 ---
 
 ## How to Add Environment Variables in Vercel:
@@ -55,10 +49,6 @@ vercel env add VITE_EMAILJS_PUBLIC_KEY
 vercel env add VITE_EMAILJS_TEMPLATE_ID
 # Enter: template_pvgfdu6
 # Select: Production, Preview, Development
-
-vercel env add VITE_EMAILJS_NEWSLETTER_TEMPLATE_ID
-# Enter: template_pvgfdu6
-# Select: Production, Preview, Development
 ```
 
 ---
@@ -70,7 +60,6 @@ vercel env add VITE_EMAILJS_NEWSLETTER_TEMPLATE_ID
 | `VITE_EMAILJS_SERVICE_ID` | `service_as8dqap` |
 | `VITE_EMAILJS_PUBLIC_KEY` | `GqL3vQDVOhyJeb49X` |
 | `VITE_EMAILJS_TEMPLATE_ID` | `template_pvgfdu6` |
-| `VITE_EMAILJS_NEWSLETTER_TEMPLATE_ID` | `template_pvgfdu6` |
 
 ---
 
@@ -96,7 +85,7 @@ After setting up the environment variables and redeploying:
 1. Visit your deployed site
 2. Open browser DevTools (F12) → Console
 3. You should see: `✅ EmailJS initialized successfully`
-4. Test the contact form and newsletter subscription
+4. Test the contact form
 5. Check your email inbox for notifications
 
 ---
